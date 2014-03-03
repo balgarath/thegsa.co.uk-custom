@@ -359,23 +359,18 @@ strong{font-weight:bold;}
 
 .upcoming p a:hover		{ color:#004281; text-decoration:underline;}
 
-
-
 .upcoming b			{ background:url(images/calendra_view.jpg) left 0 no-repeat; height:20px;  font:bold 14px Arial, Helvetica, sans-serif; color:#004281; display:block; padding:3px 0 0 30px;}
 
 .upcoming b a		{ color:#004281; text-decoration:none;}
 
 .upcoming b a:hover		{ color:#004281; text-decoration:underline;}
 
-
-
-
-
-#footer{width:943px; height:23px; margin:0px auto 60px; background-color:#cbe0f5;}
-
-
-
-
+#footer {
+width: 943px;
+height: 23px;
+margin: 100px auto 0;
+background-color: #cbe0f5;
+}
 
 ul.footerlinks	{ width:360px; height:auto; margin:0 auto; padding:5px 0 0 0;}
 
@@ -387,15 +382,7 @@ ul.footerlinks a:hover	{ color:#004281; text-decoration:underline;}
 
 ul.footerlinks li.last	{ border:none;}
 
-
-
-
-
 /* ----------------- Common ---------------------- */
-
-
-
-
 
 /* ----------------- inner 1 ---------------------- */
 
