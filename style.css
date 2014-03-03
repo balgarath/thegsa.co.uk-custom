@@ -572,3 +572,23 @@ ul.wpul_menu li a {line-height:20px !important; }
     text-decoration: none;
     width: 100px;
 }
+
+/* BUDDYPRESS */
+
+div.item-list-tabs {
+margin: 25px 0 !important;
+}
+
+.padder div.pagination {
+margin: 40px 0 !important;
+}
+
+table#message-threads {
+margin: 0 !important;
+}
+
+div.messages-options-nav {
+margin: 40px 0 !important;
+}
+
+/* BUDDYPRESS */
