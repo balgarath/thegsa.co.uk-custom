@@ -101,7 +101,15 @@ function twentyeleven_setup() {
 	add_theme_support( 'automatic-feed-links' );
 
 	// This theme uses wp_nav_menu() in one location.
-	register_nav_menu( 'primary', __( 'Primary Menu', 'twentyeleven' ) );
+	//register_nav_menu( 'primary', __( 'Primary Menu', 'twentyeleven' ) );
+	
+	register_nav_menus( array(
+		'primary' => __( 'Primary Menu', 'twentyeleven' ),
+		'video_menu' => __( 'Video Menu', 'twentyeleven' ),
+		'presentation_menu' => __( 'Presentations Menu', 'twentyeleven' ),
+		'document_menu' => __( 'Documents Menu', 'twentyeleven' )
+	) );
+	
 
 	// Add support for a variety of post formats
 	add_theme_support( 'post-formats', array( 'aside', 'link', 'gallery', 'status', 'quote', 'image' ) );
@@ -603,3 +611,50 @@ function twentyeleven_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'twentyeleven_body_classes' );
+
+/**
+ * Custom Menu Walker for Responsive Menus
+ *
+ * Creates a <select> menu instead of the default
+ * unordered list menus.
+ *
+ **/
+
+class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu{
+
+    // don't output children opening tag (`<ul>`)
+  function start_lvl(&$output, $depth=0, $args=array()) {
+        $output .= "\n<select>\n";
+    }
+ 
+    // Displays end of a level. E.g '</ul>'
+    // @see Walker::end_lvl()
+    function end_lvl(&$output, $depth=0, $args=array()) {
+        $output .= "</select>\n";
+    }
+    
+     // Displays start of an element. E.g '<li> Item Name'
+    // @see Walker::start_el()
+    function start_el(&$output, $item, $depth=0, $args=array()) {
+        $output .= "<option value='".esc_attr($item->url)."'>".esc_attr($item->title);
+    }
+ 
+    // Displays end of an element. E.g '</li>'
+    // @see Walker::end_el()
+    function end_el(&$output, $item, $depth=0, $args=array()) {
+        $output .= "</option>\n";
+    }
+}
+
+add_action('wp_footer', 'dropdown_menu_scripts');
+function dropdown_menu_scripts() {
+    ?>
+        <script>
+          jQuery(document).ready(function ($) {
+            $("#drop-nav").change( function() {
+                    document.location.href =  $(this).val();
+            });
+          });
+        </script>
+    <?php
+}

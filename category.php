@@ -121,6 +121,40 @@ if($current_cat == "Documents") {
 		
           <h1><?php single_cat_title() ?></h1>
           <p><?php echo category_description( $cat_id ); ?></p>
+          
+<?php      
+        $menu_category = get_the_category();
+        $menu_category = $menu_category[0]->category_parent;
+?>
+        
+        <?php if(is_category('videos') || $menu_category == 15): ?>
+        <?php 
+        $custom_menu_args = array(
+	'theme_location' => 'video_menu',
+        'items_wrap'     => '<select id="drop-nav"><option value="">Select a category...</option>%3$s</select>',
+        'walker'  => new Walker_Nav_Menu_Dropdown());
+        
+        wp_nav_menu( $custom_menu_args ); ?>
+	<?php endif; ?>
+	
+	<?php if(is_category('documents') || ($menu_category == 0 && !is_category('presentations'))): ?>
+        <?php 
+        $custom_menu_args = array(
+	'theme_location' => 'document_menu',
+        'items_wrap'     => '<select id="drop-nav"><option value="">Select a category...</option>%3$s</select>',
+        'walker'  => new Walker_Nav_Menu_Dropdown());
+                wp_nav_menu( $custom_menu_args ); ?>
+	<?php endif; ?>
+	
+	<?php if(is_category('presentations') || $menu_category == 13): ?>
+        <?php 
+        $custom_menu_args = array(
+	'theme_location' => 'presentation_menu',
+        'items_wrap'     => '<select id="drop-nav"><option value="">Select a category...</option>%3$s</select>',
+        'walker'  => new Walker_Nav_Menu_Dropdown());
+        
+        wp_nav_menu( $custom_menu_args ); ?>
+	<?php endif; ?>
        
         </div>
 			
