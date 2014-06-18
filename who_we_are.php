@@ -28,7 +28,7 @@ get_header(); ?>
 				<?php 
 				$cat3= "Who we are";
 				$cat3_id=get_cat_id($cat3);												
-				$qry = query_posts("category_name='Who we are'&showposts=4");	
+				$qry = query_posts("category_name='Who we are'");	
 				?>
         
         
@@ -51,21 +51,29 @@ get_header(); ?>
 		 
 		 
 			while(have_posts()):the_post();
+
+
 		 
 			$temp = get_post_custom_values("who_images");
 			
 			$temp2 = get_post_custom_values("designation");
+
+$imm = get_field('who_image');
+ 
+if( !empty($imm) )
+	$urlim = $imm['url'];
+else
+$urlim = $temp[0];
 			
-			if($g ==1)
+			if($g%2 == 1 )
 			  $class = 'fltlft';
-			else if($g ==2)
+			else 
 			  $class = 'fltrht';
-			else if($g ==3)
-			  $class = 'fltlft pad';
-			else if($g ==4)
-			  $class = 'fltrht pad';
+
+
+		
 			
-			$list .= '<div class="comment '.$class.'"><h1><a href="'.get_permalink().'">'.get_the_title().'</a></h1><h2>'.$temp2[0].'</h2><span><a href="'.get_permalink().'"><img src="'.$temp[0].'" width="73" height="109" alt=""></a></span>'.get_the_excerpt().'<div class="clear">&nbsp;</div></div> <!--  comment  -->';
+			$list .= '<div class="comment '.$class.'"><h1><a href="'.get_permalink().'">'.get_the_title().'</a></h1><h2>'.$temp2[0].'</h2><span><a href="'.get_permalink().'"><img src="'.$urlim.'" width="73" height="109" alt=""></a></span>'.get_the_excerpt().'<div class="clear">&nbsp;</div></div> <!--  comment  -->';
 			if($g%2 == 0)
 			  $list .= '<div class="clear">&nbsp;</div>';
 			
